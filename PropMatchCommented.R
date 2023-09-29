@@ -37,7 +37,11 @@ wilcox.test(formula = Age.at.Surgery~GM.Treatment, data = match.data, alternativ
 wilcox.test(formula = Approach~GM.Treatment, data = match.data, alternative = 'two.sided', paired=FALSE, car.equal=TRUE)
 
 #create jitter plot
+#you need to click finish in the top right corner after you're done with the jitter plot in RStudio if you want your code to progress!!
+#comment the line out if you don't care about the jitter plot or it'll hold up your code
 plot(m.nnc, type = 'jitter')
+#you can tell R is ready for the next command if the terminal has the > symbol show up 
+#if it's stuck, press the esc key in the terminal to stop the code
 
 #create histogram plot
 plot(m.nnc, type = 'hist')
@@ -51,7 +55,6 @@ print(getwd())
 #the below changes your workspace directory to where you're saving your results csv
 #change "teja.pidatala" below to firstname.lastname to save it to your desktop
 #if you'd like it saved elsewhere, change Desktop to the path of your folder, like Documents or Downloads
-#for example "C:\Users\Drashti.Sikligar\Documents\10 yr pao"
 setwd("C:/Users/teja.pidatala/Desktop")
 
 #the bottom prints your results to a csv file you can open
