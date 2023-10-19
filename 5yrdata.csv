@@ -1,0 +1,28 @@
+﻿MR #,Type of Surgery,Side,Age at Sx,Sex,BMI,Seldes Tear Type,ALAD Grade,A Outerbridge,FH Outerbridge,Villar Class,Labral Treatment,Capsular Treatment,Acetabuloplasty,Femoroplasty,A Microfracture,FH Microfracture,FU time,Pre mHHS,≥5y mHHS,Pre NAHS,≥5y NAHS,latest IHOT,Pre HOS-SSS,≥5y HOS-SSS,Pre VAS,≥5y VAS,≥5y Satisfaction
+271790,Scope & PAO,R,32.57,Female,22.59,1,2,2,0,0,Simple Repair,Capsular Repair/Plication,Yes,No,No,No,120.0684379,79,52,64,48.75,27,50,36.1111,7,5,10
+270416,Scope & PAO,R,16.42,Female,23.91,1,3,2,0,1,Base Repair,Capsular Repair/Plication,No,Yes,No,No,62.46908426,59.4,83,70,90,78.5217,41.6667,80.5556,9,1.99,9
+270422,Scope & PAO,L,26.41,Female,33.27,1 & 2,1,1,0,0,Simple Repair,Capsular Repair/Plication,No,No,No,No,123.3430404,55,58,47.5,72.5,45.8333,0,28.5714,5,1,7
+271923,Scope & PAO,L,19.79,Female,20.59,1,3,3,0,2,Debridement,Capsular Repair/Plication,No,Yes,No,No,120.0207554,70.4,100,71.25,97.5,68.8858,55.5556,88.8889,7,0,5
+275990,Scope & PAO,R,12.33,Female,23.02,2,2,2,0,0,Debridement,Capsular Repair/Plication,No,No,No,No,62.09941865,63.8,79,55,72.5,69.9791,41.6667,63.8889,6,4.02,7
+282918,Scope & PAO,R,19.64,Female,26.56,2,2,2,0,0,Base Repair,Capsular Repair/Plication,No,Yes,No,No,84.00770726,41,89,47.5,90,88.5833,27.8,80.5556,9,1,9
+284220,Scope & PAO,L,21.63,Male,28.18,2,4,4,2,2,Debridement,Capsular Repair/Plication,Yes,Yes,Yes,No,123.3510549,67,96,60,93.75,89.4167,39,81.25,4,1.14,10
+288462,Scope & PAO,L,16.7,Male,17.71,1,3,3,0,1,Simple Repair,Capsular Repair/Plication,Yes,Yes,No,No,125.4301437,70,96,0,93.75,48.3333,0,83.3333,6,1,10
+287011,Scope & PAO,R,28.02,Female,19.66,1,1,1,0,2,Base Repair,Capsular Repair/Plication,Yes,Yes,No,No,123.2753368,77,96,61,93.75,78.7291,33,91.6667,3,1.17,10
+292075,Scope & PAO,R,19.37,Female,21.46,1,1,1,0,2,Base Repair,Capsular Repair/Plication,Yes,No,No,No,124.0134098,69,92,71,80,61.0833,44,50,4,2.11,8
+294334,Scope & PAO,R,16.68,Female,27.43,1,2,2,0,2,Base Repair,Capsular Repair/Plication,Yes,Yes,No,No,123.676246,67,100,53,100,95.7273,21,100,4,0.67,9
+287011,Scope & PAO,L,28.73,Female,19.73,1 & 2,1,1,0,2,Simple Repair,Capsular Repair/Plication,Yes,Yes,No,No,114.77143,59,96,70,93.75,59.4167,39,91.6667,3,1.17,10
+5900,Scope & PAO,L,34.26,Female,24.74,1 & 2,2,2,0,2,Simple Repair,Capsular Repair/Plication,No,Yes,No,No,63.22646296,70.33,100,72.5,97.5,100,38.89,100,2,0,10
+326231,Scope & PAO,R,25.97,Female,21.13,2,2,2,2,0,Simple Repair,Capsular Repair/Plication,Yes,Yes,No,No,64.40949786,62.64,100,50,98.75,95.5908,55.56,100,5,0,8
+330379,Scope & PAO,L,35.89,Female,23.26,1 & 2,2,2,0,0,Simple Repair,Capsular Repair/Plication,Yes,Yes,No,No,77.32095411,61.53,100,70,100,100,33.33,100,7,0,10
+327417,Scope & PAO,R,16.35,Female,20.08,1,0,0,0,0,Simple Repair,Capsular Repair/Plication,No,Yes,No,No,76.69000786,84.62,85,86.25,91.25,94.035,75,86.1111,2,1,10
+334206,Scope & PAO,L,26,Male,28.23,1,3,4,0,2,Simple Repair,Capsular Repair/Plication,Yes,Yes,Yes,No,80.56869684,52.75,77,50,66.25,60.625,52.78,61.1111,6,4,6
+326039,Scope & PAO,R,35.26,Female,31.75,1 & 2,3,3,0,2,Simple Repair,Capsular Repair/Plication,No,Yes,No,No,71.96502452,45.05,65,51.25,71.25,56.6755,13.89,22.2222,7,5.5,9
+330984,Scope & PAO,R,16.98,Female,21.92,1,2,2,0,2,Base Repair,Capsular Repair/Plication,No,Yes,No,No,68.08462206,62,72,48.75,86.25,65.9967,52.7778,61.1111,4.71,5,8
+332221,Scope & PAO,R,22.62,Female,17.38,2,0,3,0,0,Debridement,No,No,No,No,No,64.92801765,70,68,70,81.25,67.2783,72.2222,50,3,3.5,8
+446472,Scope & PAO,L,18.6,Female,21.63,2,1,1,0,2,Base Repair,Capsular Repair/Plication,No,Yes,No,No,65.39107467,52,100,51.25,100,99.4464,63.8889,100,8.85,0,10
+440941,Scope & PAO,L,16.04,Female,20.11,1,1,1,0,2,Simple Repair,Capsular Repair/Plication,No,Yes,No,No,64.47232375,44,42,25,55,34.6609,36.1111,22.2222,10,6.57,8
+474731,Scope & PAO,L,20.57,Female,21.78,2,1,1,0,0,Simple Repair,Capsular Repair/Plication,Yes,Yes,No,No,64.62984537,79,100,83.75,100,96.2909,72.2222,100,4,0,10
+470661,Scope & PAO,L,27.71,Female,24.08,2,1,1,0,2,Simple Repair,Capsular Repair/Plication,Yes,Yes,No,No,63.28959269,63,81,45,97.5,94.8173,36.1111,97.2222,8.52,3.55,10
+460792,Scope & PAO,R,26.18,Female,24.26,2,1,1,0,0,Simple Repair,Capsular Repair/Plication,Yes,Yes,No,No,64.86813123,40,100,37.5,88.75,91.6325,30.5556,89.2857,8,2.5,9
+461070,Scope & PAO,R,20.88,Female,26.07,1 & 2,3,3,0,2,Simple Repair,Capsular Repair/Plication,Yes,Yes,No,No,64.17661789,74,100,86.25,98.75,100,77.7778,100,2.08,0,10
+483443,Scope & PAO,R,34.14,Female,30.46,1 & 2,1,1,0,2,Simple Repair,Capsular Repair/Plication,Yes,Yes,No,No,59.99623041,65,94,62.5,95,93.2967,50,80.5556,3.97,0.5,9
