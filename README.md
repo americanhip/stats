@@ -9,6 +9,7 @@ I recommend you use RStudio. It allows you to see your variables, datasets, plot
 
 ##
 HOW TO USE:
+
 To open files:
 1. Use R -- can be kind of confusing but it works
 2. Use RStudio -- a lot less confusing to use. Allows you to see variables/files/working directory.
@@ -21,6 +22,7 @@ You can either:
 PLEASE do not commit to the master branch unless you know the code works/you are making major changes. Create a new branch if you have different versions.
 
 Running code:
+
 You can:
 1. Click run at the top to run the line you're on.
 2. Copy/paste lines into the terminal to run them.
