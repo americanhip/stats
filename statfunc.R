@@ -1,3 +1,4 @@
+#read in libraries
 library(plyr)
 library(dplyr)
 library(tableone)
@@ -10,13 +11,19 @@ library(survival)
 library(ggplot2)
 library(ggsurvfit)
 library(ggbreak)
+
+#FUNCTIONS
+#cat_stat(df1col, df2col, col1head = 'col1', col2head = 'col2', fish.exact = FALSE)
+#cont_stat(dfcol1, dfcol2, colhead1 = 'col1', colhead2 = 'col2', pair = FALSE)
+#PASS(df_IJ, df_MC, PASSlist, PROlist, studylevs, time_prefix='')
+#MCID(df_IJ, df_MC, PROlist, studylevs, time_prefix = "")
+#MOI(df_IJ, df_MC, MOIlist, PROlist, studylevs, time_prefix = "")
 '
 todo
 matching fcn?
-MOI
-  100*(postop-preop)/(100-preop)
 run all outputs into a .txt or csv?
 '
+#run categorical statistics
 cat_stat <- function(df1col, df2col, col1head = 'col1', col2head = 'col2', fish.exact = FALSE){
   m <- cbind(table(df1col), table(df2col))
   colnames(m) = c(col1head, col2head)
@@ -27,6 +34,7 @@ cat_stat <- function(df1col, df2col, col1head = 'col1', col2head = 'col2', fish.
 
 #out <- cat_stat(df_PA$sex, df_MC$sex, "PA", "MC", FALSE)
 
+#run continuous statistics
 #r starts at 1
 cont_stat <- function(dfcol1, dfcol2, colhead1 = 'col1', colhead2 = 'col2', pair = FALSE) {
   out_data <- data.frame(mean(dfcol1, na.rm = TRUE), sd(dfcol1, na.rm = TRUE))
@@ -79,7 +87,8 @@ return(out)
   #output mean, sd, test results
 }
 
-pass <- function(df_IJ, df_MC, PASSlist, PROlist, studylevs, time_prefix=''){
+#calculate whether each person meets PASS and creates plot based on it. need to add significance manually!!
+pass <- function(df_IJ, df_MC, PASSlist, PROlist, studylevs = c(1,0), time_prefix=''){
 
   #PASSHHS <- 93
   #PASSFJS <- 92.2
@@ -135,7 +144,8 @@ pass <- function(df_IJ, df_MC, PASSlist, PROlist, studylevs, time_prefix=''){
 }
 #pass(df_IJ, df_MC, PASSlist, PROlist, studylevs, 'X10y.')
 
-MCID <- function(df_IJ, df_MC, PROlist, studylevs, time_prefix = ""){
+#calculate MCID and whether each person meets MCID and creates plot based on it. need to add significance manually!!
+MCID <- function(df_IJ, df_MC, PROlist, studylevs = c(1,0), time_prefix = ""){
   PRO <- c()
   Group <- c()
   values <- c()
@@ -186,7 +196,9 @@ MCID <- function(df_IJ, df_MC, PROlist, studylevs, time_prefix = ""){
 }
 #x <- MCID(df_IJ,df_MC, PROlist = c("mHHS","NAHS","HOS.SSS"),studylevs = c(1,0),time_prefix = "X10y.")
 #x
-MOI <- function(df_IJ, df_MC, MOIlist, PROlist, studylevs, time_prefix = "") {
+
+#calculate whether each person meets MOI and creates plot based on it. need to add significance manually!!
+MOI <- function(df_IJ, df_MC, MOIlist, PROlist, studylevs = c(1,0), time_prefix = "") {
   PRO <- c()
   Group <- c()
   values <- c()
@@ -244,10 +256,10 @@ MOI <- function(df_IJ, df_MC, MOIlist, PROlist, studylevs, time_prefix = "") {
   return(plot)
 
 }
-MOIlist <- c('70','80','90')
-PROlist <- c("mHHS","NAHS","HOS.SSS")
-studylevs <- c('Non-diabetic','Diabetic')
-x<-MOI(df_IJ, df_MC, MOIlist, PROlist, studylevs, time_prefix = "X.2y.")
+#MOIlist <- c('70','80','90')
+#PROlist <- c("mHHS","NAHS","HOS.SSS")
+#studylevs <- c('Non-diabetic','Diabetic')
+#x<-MOI(df_IJ, df_MC, MOIlist, PROlist, studylevs, time_prefix = "X.2y.")
 # df <- read.csv('Matched.csv')
 # df_eligible <- df[df$Endpoint == "", ]
 # df_IJ <- df_eligible[df_eligible$Obese == 1, ]
