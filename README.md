@@ -37,6 +37,10 @@ Current files
         - This file only has one comment so it's cleaner to copy paste it. Use this file only if you understand what the code does.
 2. *Kaplan Meier*
     - Commented file
+3. *statfunc.R*
+   - This has every function you'll need post match.
+4. *stats scope*
+   - This file has the implementation of each function in stat func so you know how to use it.
 
 ##
 Debugging + tips
