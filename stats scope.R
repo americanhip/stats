@@ -1,96 +1,63 @@
 source('statfunc.R')
-df <- read.csv('Matched.csv')
-
-
-#data####
-df$Diabetic. <- factor(df$Diabetic., levels = c(1, 0), ordered = TRUE)
+df <- read.csv('data.csv')
+df$Study.Group <- factor(df$Study.Group, levels = c(1, 0), ordered = TRUE)
 levs <- c('mHHS','NAHS','HOS-SSS', 'VAS','Satisfaction')
 
-df_IJ <- df[df$Diabetic. == 1, ]
-df_MC <- df[df$Diabetic. == 0, ]
+df_IJ <- df[df$Study.Group == 1, ]
+df_MC <- df[df$Study.Group == 0, ]
 
 # read excels#####
 dput(names(df))
-'c("X.1", "UID", "MR..", "Side", "WC", "Age.at.Sx", "Female",
-  "Sex", "BMI", "Seldes.Tear.Type", "ALAD.Grade", "A.Outerbridge",
-  "FH.Outerbridge", "LT.Percentile", "Villar.Class", "Troch.Bursitis",
-  "Loose.Bodies", "Labral.Treatment", "Reconstruction", "Repair",
-  "Debridement", "Capsular.Treatment", "Release", "Repair.1", "Acetabuloplasty",
-  "Femoroplasty", "X", "A.Microfracture", "FH.Microfracture", "LT.Treatment",
-  "Iliopsoas.Release", "Troch.Bursectomy", "GM.Repair", "Notchplasty",
-  "FU.time", "Pre.mHHS", "X.2y.mHHS", "Pre.NAHS", "X.2y.NAHS",
-  "Pre.IHOT", "X2y.IHOT", "Pre.HOS.SSS", "X.2y.HOS.SSS", "Pre.VAS",
-  "X.2y.VAS", "X.2y.Satisfaction", "Tonnis.Grade..Pre.op.", "Lateral.CEA..Pre.op.",
-  "Anterior.CEA..Pre.op.", "Acetabular.Inclination..Pre.op.", "Alpha.Angle..Pre.op.",
-  "Tonnis.Grade..Post.op.", "Lateral.CEA...Post.op.", "Anterior.CEA..Post.op.",
-  "Acetabular.Inclination..Post.op.", "Alpha.Angle..Post.op.",
-  "Complications", "Non.Endpoint.1", "Time.to.NE.1.Sx", "Endpoint",
-  "Time.to.End", "Diabetic.", "Type1", "Typ2", "distance", "weights",
-  "subclass")'
-
-# df_full <- read_excel('03.22.2024 THAFronthsheet.xlsx', sheet = "Data")
-# names(df_full) <- df_full[1,]
-# df_full <- df_full[-1, ]
+'c("THA.UID", "SCOPE.UID", "MRN", "MAKO", "MAKO.Numeric", "Age.at.Sx",
+"BMI", "Gender", "Gender.Numeric", "Study.Group", "distance",
+"weights", "subclass", "DOS", "Side", "Approach", "MAKO2", "DOS3",
+"Type", "FU.Date", "Time.from.Sx", "mHHS", "HHS", "FJS", "VAS",
+"Satisfaction", "HOOS.JR", "Endpoint", "DOR", "Column1", "Chart.Review.Notes",
+"Complication", "Complication.Review", "X2y.mHHS", "X2y.HHS",
+"X2y.FJS", "X2y.VAS", "X2y.Satisfaction", "X2y.HOOS.JR")'
+df_full <- read_excel('03.22.2024 THAFronthsheet.xlsx', sheet = "Data")
+names(df_full) <- df_full[1,]
+df_full <- df_full[-1, ]
 
 #df$THA.UID <-  match(df2$Activity, df1$Activity)
-#df$Study.Group <- factor(df$Study.Group, levels = c(1, 0), ordered = TRUE)
+df$Study.Group <- factor(df$Study.Group, levels = c(1, 0), ordered = TRUE)
 
 # Tables #####
 ## demographics #####
-myVars = c("Side", "WC", "Age.at.Sx", "Sex", "BMI","FU.time")
-catVars = c("Side", "WC","Sex")
-CreateTableOne(vars = myVars, strata = 'Diabetic.',factorVars = catVars, data = df)
 
+myVars = c("Gender","Side","Approach", "MAKO","Age.at.Sx","BMI","Time.from.Sx")
+catVars = c("Gender","Side","Approach", "MAKO")
+CreateTableOne(vars = myVars, strata = 'Study.Group',factorVars = catVars, data = df)
 mean(df_scope$`Time to Endpoint`, na.rm = TRUE)
 sd(df_scope$`Time to Endpoint`, na.rm = TRUE)
 
-## radiographic findings #####
-myVars = c("Tonnis.Grade..Pre.op.", "Lateral.CEA..Pre.op.",
-"Anterior.CEA..Pre.op.", "Acetabular.Inclination..Pre.op.", "Alpha.Angle..Pre.op.",
-"Tonnis.Grade..Post.op.", "Lateral.CEA...Post.op.", "Anterior.CEA..Post.op.",
-"Acetabular.Inclination..Post.op.", "Alpha.Angle..Post.op.")
-catVars = c("Tonnis.Grade..Pre.op.","Tonnis.Grade..Post.op.")
-CreateTableOne(vars = myVars, factorVars = catVars, strata = 'Diabetic.', data = df)
-
-## intraop findings #####
-myVars = c("Seldes.Tear.Type", "ALAD.Grade", "A.Outerbridge", "FH.Outerbridge")
-CreateTableOne(data = df,vars = myVars, factorVars = myVars, strata = 'Diabetic.')
-
-## intraop procedures #####
-myVars = c("Labral.Treatment","Acetabuloplasty", "Femoroplasty", "LT.Treatment", "Capsular.Treatment", "A.Microfracture", "FH.Microfracture", "Iliopsoas.Release","Loose.Bodies","Notchplasty")
-df$LT.Treatment[df$LT.Treatment == ""] <- "None"
-df$A.Microfracture[df$A.Microfracture == ""] <- "No"
-df$FH.Microfracture[df$FH.Microfracture == ""] <- "No"
-df$Iliopsoas.Release[df$Iliopsoas.Release == ""] <- "No"
-df$Notchplasty[df$Notchplasty == ""] <- "No"
-CreateTableOne(data = df,vars = myVars, factorVars = myVars, strata = 'Diabetic.')
-
-
 ## PROs #####
-df$dmhhs <- with(df, (X.2y.mHHS-Pre.mHHS))
-df$dnahs <- with(df, (X.2y.NAHS-Pre.NAHS))
-df$dhos <- with(df, (X.2y.HOS.SSS-Pre.HOS.SSS))
-df$dvas <- with(df, (X.2y.VAS-Pre.VAS))
-df$dihot <- with(df, (X2y.IHOT - Pre.IHOT))
+df$dmhhs <- with(df, (X10y.mHHS-Pre.mHHS))
+df$dnahs <- with(df, (Pre.NAHS-Pre.NAHS))
+df$dhos <- with(df, (X10y.HOS.SSS-Pre.HOS.SSS))
+df$dvas <- with(df, (X10y.VAS-Pre.VAS))
 df_pro <- df[df$Endpoint == "", ]
-df_pro <- df_pro[df_pro$Non.Endpoint.1 == "", ]
-myVars = c("Pre.mHHS", "X.2y.mHHS", "dmhhs","Pre.NAHS", "X.2y.NAHS",
-           "dnahs", "Pre.IHOT", "X2y.IHOT", "dihot", "Pre.HOS.SSS", "X.2y.HOS.SSS","dhos", "Pre.VAS",
-           "X.2y.VAS", "dvas", "X.2y.Satisfaction")
-CreateTableOne(data = df_pro,vars = myVars, strata = 'Diabetic.')
+myVars = c("Pre.mHHS", "X10y.mHHS", "Pre.NAHS",
+           "Latest", "X10y.IHOT", "Pre.HOS.SSS", "X10y.HOS.SSS", "Pre.VAS",
+           "X10y.VAS", "X10y.SF.M", "X10y.SF.P", "X10y.VR.M", "X10y.VR.P",
+           "X10y.Satisfaction", "dmhhs", "dhos", "dnahs","dvas")
+CreateTableOne(data = df,vars = myVars, strata = 'Labral.Treatment' )
 #use below if THA
 # myVars = c("mHHS", "HHS", "FJS", "VAS", "Satisfaction","HOOS.JR")
 # CreateTableOne(vars = myVars, strata = 'Study.Group',data = df_pro)
 
 ## Complications #####
-myVars = c("Complication.Rate","Complications")
+myVars = c("Complication.Table")
 #df_temp <- df[df$Complication.Table != 'numbness ', ]
-CreateTableOne(vars = myVars, factorVars = myVars, strata = 'Diabetic.',data = df)
+CreateTableOne(vars = myVars, factorVars = myVars, strata = 'Study.Group',data = df)
 
 ## Revisions #####
+df_rev <- df[df$Endpoint == 'Revision', ]
+df_rev$Endpoint[df_rev$Endpoint] <- 'Revision'
+table(df_rev$Study.Group, df_rev$Endpoint)
 
-myVars = c("Non.Endpoint.1", "Time.to.NE.1.Sx","Endpoint","Time.to.End","Complications")
-CreateTableOne(vars = myVars, factorVars = c("Non.Endpoint.1","Endpoint","Complications"), strata = 'Diabetic.',data = df)
+myVars = c("Non.Endpoint.1", "Time.to.NE","Endpoint","Time.to.End","Complication")
+CreateTableOne(vars = myVars, factorVars = c("Non.Endpoint.1","Endpoint","Complication"), strata = 'Study.Group',data = df_rev)
 
 # Durability #####
 df <- read.csv('data.csv')
@@ -201,60 +168,57 @@ df_plot$Time <- factor(df_plot$Time, levels = c('2y','5y'), ordered = TRUE)
 colors <- setNames(c("darkorange1", "dodgerblue2"), c('2y','5y'))
 
 par(mfrow = c(1,4))
-plot <- ggplot(data = df_mhhs, mapping = aes(x=Time, y=Mean, color = "mHHS")) +
-  geom_point(aes(shape = Group, color = "mHHS")) +
-  geom_line(data = df_mhhs, aes(group=Group))+
-  #geom_line(aes(x=Time, y=Mean, group = Group)) +
-  geom_point(data = df_nahs, mapping = aes(x=Time, y=Mean, shape = Group, color = "NAHS")) +
-  geom_line(data = df_nahs, aes(group=Group, color = "NAHS"))+
-  geom_point(data = df_hos, mapping = aes(x=Time, y=Mean, shape = Group, color = "HOS-SSS")) +
-  geom_line(data = df_hos, aes(group=Group, color = "HOS-SSS"))+
-  geom_point(data = df_vas, mapping = aes(x=Time, y=Mean, color = "VAS")) +
-  geom_line(data = df_vas, aes(group=Group, color = "VAS"))+
-  geom_point(data = df_sat, mapping = aes(x=Time, y=Mean, shape = Group, color = "Satisfaction")) +
-  geom_line(data = df_sat, aes(group=Group, color = "Satisfaction"))+
-  scale_y_break(c(9.5,60))
+plot <- ggplot(data = df_plot[df_plot$PRO == 'mHHS', ], mapping = aes(x = Condition, y = Value, fill = Time)) +
+  geom_bar(stat="identity", position = "dodge", )+ #+
+  labs(
+    x = 'mHHS'
+  )+
+  scale_fill_manual(values=colors)
+
+plot2 <- ggplot(data = df_plot[df_plot$PRO == 'HHS', ], mapping = aes(x = Condition, y = Value, fill = Time)) +
+  geom_bar(stat="identity", position = "dodge", )+ #+
+  labs(
+    x = 'HHS'
+  )+
+  scale_fill_manual(values=colors)
+plot3 <- ggplot(data = df_plot[df_plot$PRO == 'FJS', ], mapping = aes(x = Condition, y = Value, fill = Time)) +
+  geom_bar(stat="identity", position = "dodge", )+ #+
+  labs(
+    x = 'FJS'
+  )+
+  scale_fill_manual(values=colors)
+plot4 <- ggplot(data = df_plot[df_plot$PRO == 'VAS', ], mapping = aes(x = Condition, y = Value, fill = Time)) +
+  geom_bar(stat="identity", position = "dodge", )+ #+
+  labs(
+    x = 'VAS'
+  )+
+  scale_fill_manual(values=colors)
+plot5 <- ggplot(data = df_plot[df_plot$PRO == 'Satisfaction', ], mapping = aes(x = Condition, y = Value, fill = Time)) +
+  geom_bar(stat="identity", position = "dodge", )+ #+
+  labs(
+    x = 'Satisfaction'
+  )+
+  scale_fill_manual(values=colors)
 
 (plot+plot2+plot3)/(plot4+plot5) + plot_layout(guides = 'collect')& theme(legend.position = 'right')
 
 
 #PASS#####
-df <- read.csv('Matched.csv')
+df <- read.csv('data.csv')
 df_eligible <- df[df$Endpoint == "", ]
 df_IJ <- df_eligible[df_eligible$Study.Group == 1, ]
-df_MC <- df_ligible[df_eligible$Study.Group == 0, ]
-PASSlist <- c(83.25,85.6,76.4,72.2)
-studylevs <- c('Diabetic','Non-diabetic')
-PROlist <- c("mHHS","NAHS","HOS.SSS","IHOT")
-x2<-pass(df_IJ, df_MC, PASSlist, PROlist, studylevs, time_prefix = 'X.2y.')
+df_MC <- df_eligible[df_eligible$Study.Group == 0, ]
+PROlist <- c(93,92.2,76.7)
+studylevs <- c(1,0)
+PASSlist <- c('HHS','FJS','HOOS.JR')
+x<-pass(df_IJ, df_MC, PASSlist, PROlist, studylevs)
 
 #MCID#####
-df <- read.csv('Matched.csv')
-df$dmHHS <- with(df, (X.2y.mHHS-Pre.mHHS))
-df$dNAHS <- with(df, (X.2y.NAHS-Pre.NAHS))
-df$dHOS.SSS <- with(df, (X.2y.HOS.SSS-Pre.HOS.SSS))
-df$dVAS <- with(df, (X.2y.VAS-Pre.VAS))
-df$dIHOT <- with(df, (X2y.IHOT - Pre.IHOT))
-df$X.2y.IHOT <- df$X2y.IHOT
+df <- read.csv('data.csv')
 df_eligible <- df[df$Endpoint == "", ]
-df_IJ <- df_eligible[df_eligible$Diabetic. == 1, ]
-df_MC <- df_eligible[df_eligible$Diabetic. == 0, ]
-df_IJ$Diabetic.[df_IJ$Diabetic. == 1] <- 'Diabetic'
-df_MC$Diabetic.[df_MC$Diabetic. == 0] <- 'Non-diabetic'
-x <- MCID(df_IJ,df_MC, PROlist = c("mHHS","NAHS","HOS.SSS","VAS","IHOT"),studylevs = c('Diabetic','Non-diabetic'),time_prefix = "X.2y.")
-x + labs(
-  x = 'PRO',
-  y = 'Percentage of hips meeting MCID'
-)
-
-# MOI #####
-df <- read.csv('Matched.csv')
-df_eligible <- df[df$Endpoint == "", ]
-df_IJ <- df_eligible[df_eligible$Diabetic. == 1, ]
-df_MC <- df_eligible[df_eligible$Diabetic. == 0, ]
-MOIlist <- c('70','80','90')
-PROlist <- c("mHHS","NAHS","HOS.SSS")
-x<-MOI(df_IJ, df_MC, MOIlist, PROlist, studylevs, time_prefix = "X.2y.")
+df_IJ <- df_eligible[df_eligible$Study.Group == 1, ]
+df_MC <- df_eligible[df_eligible$Study.Group == 0, ]
+x <- MCID(df_IJ,df_MC, PROlist = c("mHHS","NAHS","HOS.SSS"),studylevs = c(1,0),time_prefix = "X10y.")
 
 # kaplan meier #####
 df <- read.csv(file = 'data.csv', fileEncoding = 'UTF-8-BOM')
