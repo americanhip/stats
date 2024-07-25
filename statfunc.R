@@ -35,7 +35,7 @@ cont_stat <- function(dfcol1, dfcol2, colhead1 = 'col1', colhead2 = 'col2', pair
     eqvar = TRUE #if paired, variance is assumed to be true
   }
 #below: perform tests according to variance, normality, and whether they are paired
-  if (normality == TRUE) {
+  if (normality == FALSE) {
     if (pair == TRUE){
       test <- c('paired t test')
       pval <- t.test(dfcol1, dfcol2, paired = TRUE)$p.value
